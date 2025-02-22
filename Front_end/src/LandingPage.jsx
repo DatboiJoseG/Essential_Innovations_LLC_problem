@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 import SearchBar from './SearchBar';
 import "./LandingPage.css";
 
@@ -7,14 +6,29 @@ export default function LandingPage() {
     const [searchResults, setSearchResults] = useState([]);
     const [selectedResult, setSelectedResult] = useState(null);
 
-    const handleSearch = async (searchTerm) => {
-        try {
-            // Replace with your backend API endpoint
-            const response = await axios.get(`https://your-backend-url.com/search?query=${searchTerm}`);
-            setSearchResults(response.data.results); // Adjust based on your API response structure
-        } catch (error) {
-            console.error('Error fetching search results:', error);
-        }
+    const handleSearch = (searchTerm) => {
+        const ws = new WebSocket(`ws://localhost:8765/search?query=${searchTerm}`);
+
+        ws.onopen = () => {
+            console.log('WebSocket connection opened');
+        };
+
+        ws.onmessage = (event) => {
+            try {
+                const data = JSON.parse(event.data);
+                setSearchResults(data.results);
+            } catch (error) {
+                console.error('Error parsing WebSocket message:', error);
+            }
+        };
+
+        ws.onerror = (error) => {
+            console.error('WebSocket error:', error);
+        };
+
+        ws.onclose = () => {
+            console.log('WebSocket connection closed');
+        };
     };
 
     const handleResultClick = (result) => {
