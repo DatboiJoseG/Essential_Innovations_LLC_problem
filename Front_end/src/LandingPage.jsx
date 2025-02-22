@@ -7,7 +7,7 @@ export default function LandingPage() {
     const [selectedResult, setSelectedResult] = useState(null);
 
     const handleSearch = (searchTerm) => {
-        const ws = new WebSocket(`ws://localhost:8765/search?query=${searchTerm}`);
+        const ws = new WebSocket(`ws://localhost:8765`);
 
         ws.onopen = () => {
             console.log('WebSocket connection opened');
