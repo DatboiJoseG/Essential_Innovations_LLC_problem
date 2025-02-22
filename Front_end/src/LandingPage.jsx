@@ -13,6 +13,7 @@ export default function LandingPage() {
         const results = [
             { id: 1, text: 'Example result 1' },
             { id: 2, text: 'Example result 2' },
+            { id: 3, text: 'Example result 3' },
         ];
         setSearchResults(results);
     };
