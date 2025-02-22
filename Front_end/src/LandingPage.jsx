@@ -6,7 +6,7 @@ import "./LandingPage.css";
 export default function LandingPage() {
     const [searchResults, setSearchResults] = useState([]);
     const [selectedResult, setSelectedResult] = useState(null);
-    const [language, setLanguage] = useState('es'); // Default to Spanish
+    const [language, setLanguage] = useState('eng'); // Default to English
 
     const handleSearch = (searchTerm) => {
         const ws = new WebSocket(`ws://localhost:8765`);
@@ -59,14 +59,16 @@ export default function LandingPage() {
                 <SearchBar onSearch={handleSearch} clearSearch={clearSearch} />
             </div>
             <div className="content-container">
-                <div className="results-container">
-                    <h3>Search Results:</h3>
-                    {searchResults.map(result => (
-                        <div key={result.id} onClick={() => handleResultClick(result)}>
-                            {result.title}
-                        </div>
-                    ))}
-                </div>
+                {searchResults.length > 0 && (
+                    <div className="results-container">
+                        <h3>Search Results:</h3>
+                        {searchResults.map(result => (
+                            <div key={result.id} onClick={() => handleResultClick(result)}>
+                                {result.title}
+                            </div>
+                        ))}
+                    </div>
+                )}
                 {selectedResult && (
                     <div className="translation-containers">
                         <div className="english-version">
