@@ -7,14 +7,29 @@ export default function LandingPage() {
     const [selectedResult, setSelectedResult] = useState(null);
 
     const handleSearch = (searchTerm) => {
-        // Implement your search logic here
-        console.log('Searching for:', searchTerm);
+        const ws = new WebSocket(`ws://localhost:8765`);
 
-        const results = [
-            { id: 1, text: 'Example result 1' },
-            { id: 2, text: 'Example result 2' },
-        ];
-        setSearchResults(results);
+        ws.onopen = () => {
+            console.log('WebSocket connection opened');
+            ws.send(searchTerm); // Send the search term to the server
+        };
+
+        ws.onmessage = (event) => {
+            try {
+                const data = JSON.parse(event.data);
+                setSearchResults(data.results);
+            } catch (error) {
+                console.error('Error parsing WebSocket message:', error);
+            }
+        };
+
+        ws.onerror = (error) => {
+            console.error('WebSocket error:', error);
+        };
+
+        ws.onclose = () => {
+            console.log('WebSocket connection closed');
+        };
     };
 
     const handleResultClick = (result) => {
@@ -25,7 +40,7 @@ export default function LandingPage() {
         <div className="landing-page">
             <div className="prompts">
                 <h1>Welcome to Translator App!</h1>
-                <h2>Looking for a <a className ="Job_word" target='_blank' href='https://www.linkedin.com/?trk=Officekey'>job</a>? Enter keywords below</h2>
+                <h2>Looking for a job? Enter keywords below</h2>
             </div>
             <div className="search-bar-container">
                 <SearchBar onSearch={handleSearch} />

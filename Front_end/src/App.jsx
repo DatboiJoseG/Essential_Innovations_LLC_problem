@@ -4,12 +4,14 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import LandingPage from "./LandingPage"
 import SearchBar from "./SearchBar"
+import DropdownList from "./LanguageList"
 
 function App() {
 
 
   return (
     <>
+      <DropdownList />
       <LandingPage />
      
     </>
