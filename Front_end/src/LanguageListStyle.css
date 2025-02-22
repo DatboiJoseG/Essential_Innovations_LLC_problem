@@ -25,3 +25,8 @@
     color: white;
     border-color: #0056b3;
   }
+
+  .language-button{
+    font-family: 'Roboto', sans-serif;
+    color: black;
+  }
