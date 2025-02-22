@@ -12,14 +12,6 @@
     /* Light text for contrast */
 }
 
-/* Bold job word in white */
-.Job_word {
-    font-weight: bold;
-    color: #F8FAFC;
-    /* Soft White */
-    font-size: 24px;
-}
-
 /* Subtle muted steel blue for prompts */
 .prompts {
     text-align: center;
