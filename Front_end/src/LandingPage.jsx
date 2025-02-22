@@ -25,7 +25,7 @@ export default function LandingPage() {
         <div className="landing-page">
             <div className="prompts">
                 <h1>Welcome to Translator App!</h1>
-                <h2>Looking for a job? Enter keywords below</h2>
+                <h2>Looking for a <a className ="Job_word" target='_blank' href='https://www.linkedin.com/?trk=Officekey'>job</a>? Enter keywords below</h2>
             </div>
             <div className="search-bar-container">
                 <SearchBar onSearch={handleSearch} />
