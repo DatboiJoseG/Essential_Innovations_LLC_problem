@@ -1,10 +1,24 @@
+import { useState } from 'react';
 import SearchBar from './SearchBar';
 import "./LandingPage.css";
 
 export default function LandingPage() {
+    const [searchResults, setSearchResults] = useState([]);
+    const [selectedResult, setSelectedResult] = useState(null);
+
     const handleSearch = (searchTerm) => {
         // Implement your search logic here
         console.log('Searching for:', searchTerm);
+
+        const results = [
+            { id: 1, text: 'Example result 1' },
+            { id: 2, text: 'Example result 2' },
+        ];
+        setSearchResults(results);
+    };
+
+    const handleResultClick = (result) => {
+        setSelectedResult(result);
     };
 
     return (
@@ -15,6 +29,28 @@ export default function LandingPage() {
             </div>
             <div className="search-bar-container">
                 <SearchBar onSearch={handleSearch} />
+            </div>
+            <div className="content-container">
+                <div className="results-container">
+                    <h3>Search Results:</h3>
+                    {searchResults.map(result => (
+                        <div key={result.id} onClick={() => handleResultClick(result)}>
+                            {result.text}
+                        </div>
+                    ))}
+                </div>
+                {selectedResult && (
+                    <div className="translation-containers">
+                        <div className="english-version">
+                            <h3>English Version:</h3>
+                            <p>{selectedResult.text}</p>
+                        </div>
+                        <div className="other-language-version">
+                            <h3>Other Language Version:</h3>
+                            <p>{/* Implement translation logic here */}</p>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );
