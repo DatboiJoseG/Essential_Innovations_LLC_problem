@@ -11,6 +11,7 @@ export default function LandingPage() {
 
         ws.onopen = () => {
             console.log('WebSocket connection opened');
+            ws.send(searchTerm); // Send the search term to the server
         };
 
         ws.onmessage = (event) => {
