@@ -10,7 +10,7 @@ export default function LandingPage() {
     return (
         <div className="landing-page">
             <div className="prompts">
-                <h1>Welcome to Translator App</h1>
+                <h1>Welcome to Translator App!</h1>
                 <h2>Looking for a job? Enter keywords below</h2>
             </div>
             <div className="search-bar-container">
