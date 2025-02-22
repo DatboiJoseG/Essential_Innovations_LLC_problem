@@ -5,15 +5,18 @@
     align-items: center;
     height: 100vh;
     justify-content: flex-start;
-    background-color: #3a547f; /* Dark Slate Blue */
+    background-color: #3a547f;
+    /* Dark Slate Blue */
     font-family: 'Arial', sans-serif;
-    color: #F8FAFC; /* Light text for contrast */
+    color: #F8FAFC;
+    /* Light text for contrast */
 }
 
 /* Bold job word in white */
 .Job_word {
     font-weight: bold;
-    color: #F8FAFC; /* Soft White */
+    color: #F8FAFC;
+    /* Soft White */
     font-size: 24px;
 }
 
@@ -23,7 +26,8 @@
     margin-bottom: 20px;
     font-size: 18px;
     font-weight: bold;
-    color: #ffffff; /* Muted Steel Blue */
+    color: #ffffff;
+    /* Muted Steel Blue */
 }
 
 /* Search bar container with contrast */
@@ -32,29 +36,43 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
+    width: 100%;
+    /* Make the container take full width */
+    max-width: 800px;
+    /* Set a maximum width */
 }
 
 /* Search form with rounded edges */
 .search-bar-form {
     display: flex;
     align-items: center;
-    background: #334155; /* Slate Gray Blue */
-    padding: 10px;
+    background: #334155;
+    /* Slate Gray Blue */
+    padding: 20px;
     border-radius: 25px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    /* Make the form take full width */
 }
 
 /* Search input field with lighter gray-blue */
 .search-input {
-    padding: 12px;
-    font-size: 16px;
+    flex-grow: 1;
+    /* Allow the input to grow and take available space */
+    padding: 15px;
+    /* Adjust padding for size */
+    font-size: 18px;
+    /* Adjust font size */
     margin-right: 10px;
     border-radius: 20px;
-    border: 1px solid #64748B; /* Softer gray-blue */
-    background-color: #CBD5E1; /* Light Steel Blue */
+    border: 1px solid #64748B;
+    /* Softer gray-blue */
+    background-color: #CBD5E1;
+    /* Light Steel Blue */
     outline: none;
     transition: all 0.3s ease;
-    color: #1E293B; /* Dark text for contrast */
+    color: #1E293B;
+    /* Dark text for contrast */
 }
 
 /* Input field highlight when focused */
@@ -65,9 +83,12 @@
 
 /* Search button with vibrant blue */
 .search-button {
-    padding: 12px 20px;
-    font-size: 16px;
-    background-color: #60A5FA; /* Sky Blue */
+    padding: 15px 25px;
+    /* Adjust padding for size */
+    font-size: 18px;
+    /* Adjust font size */
+    background-color: #60A5FA;
+    /* Sky Blue */
     color: white;
     border: none;
     border-radius: 20px;
@@ -77,7 +98,8 @@
 
 /* Search button hover effect */
 .search-button:hover {
-    background-color: #3B82F6; /* Deep Blue */
+    background-color: #3B82F6;
+    /* Deep Blue */
 }
 
 /* Content layout */
@@ -99,17 +121,20 @@
 .results-container div {
     padding: 12px;
     border-radius: 10px;
-    border: 1px solid #475569; /* Dark Blue-Gray */
+    border: 1px solid #475569;
+    /* Dark Blue-Gray */
     margin-top: 8px;
     cursor: pointer;
-    background: #475569; /* Blue-Gray */
+    background: #475569;
+    /* Blue-Gray */
     transition: background 0.3s ease;
     color: white;
 }
 
 /* Results box hover effect */
 .results-container div:hover {
-    background: #64748B; /* Softer Blue-Gray */
+    background: #64748B;
+    /* Softer Blue-Gray */
 }
 
 /* Translation containers in bold blues */
@@ -127,8 +152,10 @@
     width: 48%;
     padding: 15px;
     border-radius: 12px;
-    border-left: 5px solid #1E40AF; /* Rich Blue */
-    background: #334155; /* Slate Gray Blue */
+    border-left: 5px solid #1E40AF;
+    /* Rich Blue */
+    background: #334155;
+    /* Slate Gray Blue */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -137,7 +164,9 @@
     width: 48%;
     padding: 15px;
     border-radius: 12px;
-    border-left: 5px solid #0EA5E9; /* Cyan Blue */
-    background: #334155; /* Slate Gray Blue */
+    border-left: 5px solid #0EA5E9;
+    /* Cyan Blue */
+    background: #334155;
+    /* Slate Gray Blue */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
