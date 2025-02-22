@@ -1,57 +1,144 @@
-body {
-    font-family: Arial, sans-serif;
+/* Full-screen background in light soft white */
+.landing-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    justify-content: flex-start;
+    background-color: #F8FAFC; /* Light Background */
+    font-family: 'Arial', sans-serif;
+    color: #1E293B; /* Dark text for contrast */
+}
+
+/* Bold job word in deep slate blue */
+.Job_word {
+    font-weight: bold;
+    color: #1E293B; /* Slate Blue Black */
+    font-size: 24px;
+}
+
+/* Subtle deep blue for prompts */
+.prompts {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #475569; /* Deep Blue Gray */
+}
+
+/* Search bar container with a soft card-like feel */
+.search-bar-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #f4f4f4;
-    margin: 0;
+    margin-bottom: 20px;
 }
 
-.container {
+/* Search form with rounded edges */
+.search-bar-form {
+    display: flex;
+    align-items: center;
     background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 300px;
-}
-
-.hidden {
-    display: none;
-}
-
-input {
-    width: 100%;
-    margin: 10px 0;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-button {
-    width: 100%;
     padding: 10px;
-    background: blue;
+    border-radius: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Search input field with dark text */
+.search-input {
+    padding: 12px;
+    font-size: 16px;
+    margin-right: 10px;
+    border-radius: 20px;
+    border: 1px solid #94A3B8; /* Muted Blue-Gray */
+    background-color: white;
+    outline: none;
+    transition: all 0.3s ease;
+    color: #1E293B; /* Dark text for contrast */
+}
+
+/* Input field highlight when focused */
+.search-input:focus {
+    border-color: #0EA5E9; /* Bright Cyan Blue */
+    box-shadow: 0 0 8px rgba(14, 165, 233, 0.6);
+}
+
+/* Search button with vibrant blue */
+.search-button {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #0EA5E9; /* Cyan Blue */
     color: white;
     border: none;
+    border-radius: 20px;
     cursor: pointer;
-    border-radius: 5px;
+    transition: background 0.3s ease;
 }
 
-button:hover {
-    background: darkblue;
+/* Search button hover effect */
+.search-button:hover {
+    background-color: #0284C7; /* Deeper Blue */
 }
 
-p {
-    font-size: 14px;
+/* Content layout */
+.content-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-top: 20px;
 }
 
-a {
-    color: blue;
-    text-decoration: none;
+/* Results container */
+.results-container {
+    width: 20%;
+    text-align: left;
 }
 
-a:hover {
-    text-decoration: underline;
+/* Individual results with hover effect */
+.results-container div {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #94A3B8; /* Muted Blue-Gray */
+    margin-top: 8px;
+    cursor: pointer;
+    background: white;
+    transition: background 0.3s ease, transform 0.2s ease;
+    color: #1E293B; /* Dark Text */
+}
+
+/* Results box hover effect */
+.results-container div:hover {
+    background: #E2E8F0; /* Light Blue-Gray */
+    transform: scale(1.02);
+}
+
+/* Translation containers with light boxes */
+.translation-containers {
+    display: flex;
+    flex-direction: row;
+    width: 75%;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 80px;
+}
+
+/* English translation section */
+.english-version {
+    width: 48%;
+    padding: 15px;
+    border-radius: 12px;
+    border-left: 5px solid #0EA5E9; /* Cyan Blue */
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Other language translation section */
+.other-language-version {
+    width: 48%;
+    padding: 15px;
+    border-radius: 12px;
+    border-left: 5px solid #0284C7; /* Deep Blue */
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
