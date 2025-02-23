@@ -1,0 +1,84 @@
+from google import genai
+from google.genai import types
+import requests
+import pandas as pd
+import socket
+import asyncio
+import websockets
+import json
+
+API_KEY = '2d6d4e20d53d83b6d8de1f685dca23ce'
+Gemini_API_Key = 'AIzaSyD9QfRl8nHJEyKdxOOB9BxcHgeInljWPAo'
+
+async def backend(websocket):
+    data = await websocket.recv()
+    parsed_data = json.loads(data) 
+    searchTerm = parsed_data["searchTerm"]
+    target_language = parsed_data["language"]
+    sys_prompt = '''
+    You are a highly accurate and meticulous translator specializing in translations between the English language and {target_language} language. Your primary task is to translate text provided by the user from English to {target_language}.
+    '''.format(target_language=target_language)
+    sys_prompt2 = '''
+    Requirement: Give your answer in 1 word only.
+    Hint: the word provided can be in English or {target_language}. 
+    Instruction: You will look for a single job title that is closely related to {searchTerm} is'''.format(target_language=target_language, searchTerm=searchTerm)
+
+    client = genai.Client(api_key=Gemini_API_Key)
+
+    response_ = client.models.generate_content(
+                    model='gemini-2.0-flash', 
+                    contents=searchTerm, 
+                    config=types.GenerateContentConfig(
+                        system_instruction=sys_prompt2
+                    ))
+    gud_job = response_.text
+
+    base_url = 'https://api.adzuna.com/v1/api/jobs/us/search/1'
+
+    params = {
+        'app_id': '3c9b111c', 
+        'app_key': API_KEY,
+        'results_per_page': 1,
+        'what': gud_job,
+        'where': 'Kentucky',
+    }
+
+    df = pd.DataFrame(columns=["Job Title", "Company", "Location", "Description", "URL", "Title_Translation", "Description_Translation"])
+
+    response = requests.get(base_url, params=params)
+
+    if response.status_code == 200:
+        data = response.json()
+        for job in data['results']:
+            descriptionTranslation = client.models.generate_content(
+                    model='gemini-2.0-flash', 
+                    contents=job['title'], 
+                    config=types.GenerateContentConfig(
+                        system_instruction=sys_prompt
+                    ))
+            titleTranslation = client.models.generate_content(
+                    model='gemini-2.0-flash', 
+                    contents=job.get('description', 'No description available'), 
+                    config=types.GenerateContentConfig(
+                        system_instruction=sys_prompt
+                    ))
+            new_row = {
+                "Job Title": job["title"],
+                "Company": job["company"]["display_name"],
+                "Location": job['location']['display_name'],
+                "Description": job.get('description', 'No description available'),
+                "URL": job['redirect_url'],
+                "Title_Translation": titleTranslation.text,
+                "Description_Translation": descriptionTranslation.text
+
+            }
+            df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
+            # print(df.to_dict())
+        await websocket.send(df.to_json())
+
+async def main():
+    async with websockets.serve(backend, "localhost", 8765): #"ws://localhost:8765"
+        await asyncio.Future()
+
+if __name__ == "__main__":
+    asyncio.run(main())

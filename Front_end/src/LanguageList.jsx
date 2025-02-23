@@ -1,37 +1,41 @@
-import { useState } from "react";
-import "./LanguageListStyle.css"; // Import the CSS file
+import { useState } from 'react';
 
-const LanguageSelector = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState("en");
+export default function LanguageList({ onLanguageChange }) {
+  const [language, setLanguage] = useState('eng');
+
+  const handleLanguageChange = (selectedLanguage) => {
+    console.log(`Language changed to: ${selectedLanguage}`)
+    setLanguage(selectedLanguage);
+    onLanguageChange(selectedLanguage);
+  };
 
   return (
-    <div className="language-container">
-      <button 
-        className={`language-button ${selectedLanguage === "en" ? "active" : ""}`} 
-        onClick={() => setSelectedLanguage("en")}
+    <div className="language-list">
+      <label>Select Language:</label>
+      <button
+        className={language === 'eng' ? 'active' : ''}
+        onClick={() => handleLanguageChange('eng')}
       >
         English
       </button>
-      <button 
-        className={`language-button ${selectedLanguage === "es" ? "active" : ""}`} 
-        onClick={() => setSelectedLanguage("es")}
+      <button
+        className={language === 'es' ? 'active' : ''}
+        onClick={() => handleLanguageChange('es')}
       >
-        Español
+        Spanish
       </button>
-      <button 
-        className={`language-button ${selectedLanguage === "fr" ? "active" : ""}`} 
-        onClick={() => setSelectedLanguage("fr")}
+      <button
+        className={language === 'fr' ? 'active' : ''}
+        onClick={() => handleLanguageChange('fr')}
       >
-        Français
+        French
       </button>
-      <button 
-        className={`language-button ${selectedLanguage === "ar" ? "active" : ""}`} 
-        onClick={() => setSelectedLanguage("ar")}
+      <button
+        className={language === 'de' ? 'active' : ''}
+        onClick={() => handleLanguageChange('de')}
       >
-        العربية
+        German
       </button>
     </div>
   );
-};
-
-export default LanguageSelector;
+}
