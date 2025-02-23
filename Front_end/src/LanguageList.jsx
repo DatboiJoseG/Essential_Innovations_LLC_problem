@@ -1,37 +1,40 @@
-import { useState } from "react";
-import "./LanguageListStyle.css"; // Import the CSS file
+import { useState } from 'react';
 
-const LanguageSelector = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState("en");
+export default function LanguageList({ onLanguageChange }) {
+    const [language, setLanguage] = useState('eng');
 
-  return (
-    <div className="language-container">
-      <button 
-        className={`language-button ${selectedLanguage === "en" ? "active" : ""}`} 
-        onClick={() => setSelectedLanguage("en")}
-      >
-        English
-      </button>
-      <button 
-        className={`language-button ${selectedLanguage === "es" ? "active" : ""}`} 
-        onClick={() => setSelectedLanguage("es")}
-      >
-        Español
-      </button>
-      <button 
-        className={`language-button ${selectedLanguage === "fr" ? "active" : ""}`} 
-        onClick={() => setSelectedLanguage("fr")}
-      >
-        Français
-      </button>
-      <button 
-        className={`language-button ${selectedLanguage === "ar" ? "active" : ""}`} 
-        onClick={() => setSelectedLanguage("ar")}
-      >
-        العربية
-      </button>
-    </div>
-  );
-};
+    const handleLanguageChange = (selectedLanguage) => {
+        setLanguage(selectedLanguage);
+        onLanguageChange(selectedLanguage); 
+    };
 
-export default LanguageSelector;
+    return (
+        <div className="language-list">
+            <label>Select Language:</label>
+            <button 
+                className={language === 'eng' ? 'active' : ''} 
+                onClick={() => handleLanguageChange('eng')}
+            >
+                English
+            </button>
+            <button 
+                className={language === 'es' ? 'active' : ''} 
+                onClick={() => handleLanguageChange('es')}
+            >
+                Spanish
+            </button>
+            <button 
+                className={language === 'fr' ? 'active' : ''} 
+                onClick={() => handleLanguageChange('fr')}
+            >
+                French
+            </button>
+            <button 
+                className={language === 'de' ? 'active' : ''} 
+                onClick={() => handleLanguageChange('de')}
+            >
+                German
+            </button>
+        </div>
+    );
+}
