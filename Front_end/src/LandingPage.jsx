@@ -29,14 +29,14 @@ export default function LandingPage() {
 
         newWs.onopen = () => {
             console.log('WebSocket connection opened');
-            newWs.send(JSON.stringify({ searchTerm: term, language })); // Send both search term and language
+            newWs.send(JSON.stringify({ searchTerm: term, language }));
         };
 
         newWs.onmessage = (event) => {
             try {
                 const data = JSON.parse(event.data);
-                console.log('WebSocket message received:', data); // Debugging statement
-                setSearchResults(data.results);
+                console.log('WebSocket message received:', data);
+                setSearchResults(data);
             } catch (error) {
                 console.error('Error parsing WebSocket message:', error);
             }
@@ -81,28 +81,18 @@ export default function LandingPage() {
                 <SearchBar onSearch={handleSearch} clearSearch={clearSearch} searchTerm={searchTerm} />
             </div>
             <div className="content-container">
-                {searchResults && searchResults.length > 0 && (
+                {searchResults.length > 0 && (
                     <div className="results-container">
                         <h3>Search Results:</h3>
                         {searchResults.map(result => (
-                            <div key={result.id} onClick={() => handleResultClick(result)}>
-                                {result.title}
+                            <div key={result["Job Title"]} onClick={() => handleResultClick(result)}>
+                                <h4>{result["Job Title"]}</h4>
+                                <p>{result["Description"]}</p>
+                                <p><strong>Company:</strong> {result["Company"]}</p>
+                                <p><strong>Location:</strong> {result["Location"]}</p>
+                                <a href={result["URL"]} target="_blank" rel="noopener noreferrer">View Job</a>
                             </div>
                         ))}
-                    </div>
-                )}
-                {selectedResult && (
-                    <div className="translation-containers">
-                        <div className="english-version">
-                            <h3>English Version:</h3>
-                            <p>{selectedResult.title}</p>
-                            <p>{selectedResult.description}</p>
-                        </div>
-                        <div className="other-language-version">
-                            <h3>Other Language Version:</h3>
-                            <p>{selectedResult.title_translation}</p>
-                            <p>{selectedResult.description_translation}</p>
-                        </div>
                     </div>
                 )}
             </div>
