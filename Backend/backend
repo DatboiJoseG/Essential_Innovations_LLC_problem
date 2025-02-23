@@ -13,8 +13,8 @@ Gemini_API_Key = 'AIzaSyD9QfRl8nHJEyKdxOOB9BxcHgeInljWPAo'
 async def backend(websocket):
     data = await websocket.recv()
     parsed_data = json.loads(data) 
-    searchTerm = parsed_data.get("searchTerm", "teaching") 
-    target_language = parsed_data.get("language", "English")
+    searchTerm = parsed_data["searchTerm"]
+    target_language = parsed_data["language"]
     sys_prompt = '''
     You are a highly accurate and meticulous translator specializing in translations between the English language and {target_language} language. Your primary task is to translate text provided by the user from English to {target_language}.
     '''.format(target_language=target_language)
