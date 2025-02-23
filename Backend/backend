@@ -2,7 +2,6 @@ from google import genai
 from google.genai import types
 import requests
 import pandas as pd
-import socket
 import asyncio
 import websockets
 import json
@@ -21,7 +20,7 @@ async def backend(websocket):
     sys_prompt2 = '''
     Requirement: Give your answer in 1 word only.
     Hint: the word provided can be in English or {target_language}. 
-    Instruction: You will look for a single job title that is closely related to {searchTerm} is'''.format(target_language=target_language, searchTerm=searchTerm)
+    Instruction: You will look for a single job title in English that is closely related to {searchTerm} is'''.format(target_language=target_language, searchTerm=searchTerm)
 
     client = genai.Client(api_key=Gemini_API_Key)
 
