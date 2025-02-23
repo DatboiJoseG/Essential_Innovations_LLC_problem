@@ -5,12 +5,16 @@ import pandas as pd
 import socket
 import asyncio
 import websockets
+import json
 
 API_KEY = '2d6d4e20d53d83b6d8de1f685dca23ce'
 Gemini_API_Key = 'AIzaSyD9QfRl8nHJEyKdxOOB9BxcHgeInljWPAo'
 
 async def backend(websocket):
-    target_language = await websocket.recv()
+    data = await websocket.recv()
+    parsed_data = json.loads(data) 
+    job = parsed_data.get("searchTerm", "teaching") 
+    target_language = parsed_data.get("language", "English")
     sys_prompt = '''
     You are a highly accurate and meticulous translator specializing in translations between the English language and {target_language} language. Your primary task is to translate text provided by the user from English to {target_language}.
     '''.format(target_language=target_language)
@@ -22,7 +26,7 @@ async def backend(websocket):
         'app_id': '3c9b111c', 
         'app_key': API_KEY,
         'results_per_page': 1,
-        'what': 'teaching',
+        'what': job,
         'where': 'Kentucky',
     }
 
