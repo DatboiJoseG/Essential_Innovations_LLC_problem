@@ -4,6 +4,7 @@
 Kentucky's immigrant and refugee communities face significant challenges in navigating workforce entry and participation, often complicated by language barriers and complex bureaucratic systems.
 
 **AICommunityMobile** is an AI-powered multilingual application designed to help immigrants and refugees in Kentucky access and understand workforce-related information, requirements, and opportunities in their primary language.
+[Project Slide Deck](https://docs.google.com/presentation/d/1lBD3rA1fe3HMjcErkoJn9TU1xg3NRMg_ezplriQT3wU/edit#slide=id.g339184218ca_0_17)
 
 ## Key Features & Requirements
 - Multilingual support for both text and voice interactions
@@ -51,17 +52,6 @@ Kentucky's immigrant and refugee communities face significant challenges in navi
 - BeautifulSoup
 - Vite + React
 - Other open-source libraries and resources
-
-## Presentation Requirements
-- **Live Demo (Preferred):** Show your product in action with a live demonstration of key features.
-- **Slide Deck:** Present a comprehensive overview including:
-  - Problem: What issue are you solving?
-  - Solution: How does your project address it?
-  - Outcome: What are the results and benefits?
-  - How it works: Technical implementation
-  - Team: Who contributed what?
-
-[Project Slide Deck](https://docs.google.com/presentation/d/1lBD3rA1fe3HMjcErkoJn9TU1xg3NRMg_ezplriQT3wU/edit#slide=id.g339184218ca_0_17)
 
 ## Team Members
 - **Keenrruy Murillo** (keenrruyjr@gmail.com) – Python, backend, algorithms, data structures
