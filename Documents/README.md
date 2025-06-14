@@ -1,4 +1,4 @@
-# Essential Innovations LLC – AICommunityMobile
+# Essential Innovations LLC
 
 ## Project Overview
 Kentucky's immigrant and refugee communities face significant challenges in navigating workforce entry and participation, often complicated by language barriers and complex bureaucratic systems.
