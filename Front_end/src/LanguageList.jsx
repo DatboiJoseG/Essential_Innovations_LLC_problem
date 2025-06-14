@@ -1,11 +1,7 @@
 import { useState } from 'react';
 
-export default function LanguageList({ onLanguageChange }) {
-  const [language, setLanguage] = useState('eng');
-
+export default function LanguageList({ onLanguageChange, language }) {
   const handleLanguageChange = (selectedLanguage) => {
-    console.log(`Language changed to: ${selectedLanguage}`)
-    setLanguage(selectedLanguage);
     onLanguageChange(selectedLanguage);
   };
 
@@ -13,25 +9,19 @@ export default function LanguageList({ onLanguageChange }) {
     <div className="language-list">
       <label>Select Language:</label>
       <button
-        className={language === 'eng' ? 'active' : ''}
-        onClick={() => handleLanguageChange('eng')}
-      >
-        English
-      </button>
-      <button
-        className={language === 'es' ? 'active' : ''}
+        className={language === 'es' ? 'language-button active' : 'language-button'}
         onClick={() => handleLanguageChange('es')}
       >
         Spanish
       </button>
       <button
-        className={language === 'fr' ? 'active' : ''}
+        className={language === 'fr' ? 'language-button active' : 'language-button'}
         onClick={() => handleLanguageChange('fr')}
       >
         French
       </button>
       <button
-        className={language === 'de' ? 'active' : ''}
+        className={language === 'de' ? 'language-button active' : 'language-button'}
         onClick={() => handleLanguageChange('de')}
       >
         German

@@ -1,3 +1,5 @@
+import os
+from dotenv import load_dotenv
 from google import genai
 from google.genai import types
 import requests
@@ -7,10 +9,14 @@ import asyncio
 import websockets
 import json
 
-API_KEY = '2d6d4e20d53d83b6d8de1f685dca23ce'
-Gemini_API_Key = 'AIzaSyD9QfRl8nHJEyKdxOOB9BxcHgeInljWPAo'
+load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
+
+API_KEY = os.getenv('ADZUNA_API_KEY')
+APP_ID = os.getenv('ADZUNA_APP_ID')
+Gemini_API_Key = os.getenv('GEMINI_API_KEY')
 
 async def backend(websocket):
+    print("[INFO] Connection received.")
     data = await websocket.recv()
     parsed_data = json.loads(data) 
     searchTerm = parsed_data["searchTerm"]
@@ -36,15 +42,14 @@ async def backend(websocket):
     base_url = 'https://api.adzuna.com/v1/api/jobs/us/search/1'
 
     params = {
-        'app_id': '3c9b111c', 
+        'app_id': APP_ID,
         'app_key': API_KEY,
         'results_per_page': 1,
         'what': gud_job,
         'where': 'Kentucky',
     }
 
-    df = pd.DataFrame(columns=["Job Title", "Company", "Location", "Description", "URL", "Title_Translation", "Description_Translation"])
-
+    results = []
     response = requests.get(base_url, params=params)
 
     if response.status_code == 200:
@@ -62,22 +67,24 @@ async def backend(websocket):
                     config=types.GenerateContentConfig(
                         system_instruction=sys_prompt
                     ))
-            new_row = {
-                "Job Title": job["title"],
-                "Company": job["company"]["display_name"],
-                "Location": job['location']['display_name'],
-                "Description": job.get('description', 'No description available'),
-                "URL": job['redirect_url'],
-                "Title_Translation": titleTranslation.text,
-                "Description_Translation": descriptionTranslation.text
-
+            job_dict = {
+                "id": job.get("id", job.get("redirect_url", "")),
+                "title": job["title"],
+                "company": job["company"]["display_name"],
+                "location": job['location']['display_name'],
+                "description": job.get('description', 'No description available'),
+                "url": job['redirect_url'],
+                "title_translation": titleTranslation.text,
+                "description_translation": descriptionTranslation.text
             }
-            df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
-            # print(df.to_dict())
-        await websocket.send(df.to_json())
+            results.append(job_dict)
+        print("[INFO] Sending response to client.")
+        await websocket.send(json.dumps({"results": results}))
 
 async def main():
-    async with websockets.serve(backend, "localhost", 8765): #"ws://localhost:8765"
+    print("[INFO] Backend server starting on ws://localhost:8765 ...")
+    async with websockets.serve(backend, "localhost", 8765):
+        print("[INFO] Backend server is running and listening for connections.")
         await asyncio.Future()
 
 if __name__ == "__main__":

@@ -1,0 +1,9 @@
+google-genai
+requests
+pandas
+websockets
+cryptography
+beautifulsoup4
+mysql-connector-python
+jsonschema
+python-dotenv 

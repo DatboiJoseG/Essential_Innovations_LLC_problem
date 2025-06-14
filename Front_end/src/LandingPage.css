@@ -162,3 +162,36 @@
     /* Slate Gray Blue */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
+
+.language-button {
+    padding: 8px 12px;
+    border: 2px solid #ccc;
+    background-color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    color: black;
+    margin: 0 5px;
+}
+.language-button.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #0056b3;
+}
+
+.large-panel {
+    min-height: 225px;
+    /* Further reduced height for more compact panels */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.large-panel p {
+    white-space: pre-wrap;
+    overflow: visible;
+    text-overflow: unset;
+    word-break: break-word;
+    max-width: 100%;
+}

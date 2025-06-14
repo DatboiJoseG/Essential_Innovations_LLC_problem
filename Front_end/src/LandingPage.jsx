@@ -6,7 +6,7 @@ import "./LandingPage.css";
 export default function LandingPage() {
     const [searchResults, setSearchResults] = useState([]);
     const [selectedResult, setSelectedResult] = useState(null);
-    const [language, setLanguage] = useState('eng'); // Default to English
+    const [language, setLanguage] = useState('es'); // Default to Spanish
     const [searchTerm, setSearchTerm] = useState('');
     const [ws, setWs] = useState(null);
 
@@ -18,7 +18,7 @@ export default function LandingPage() {
         };
     }, [ws]);
 
-    const handleSearch = (term) => {
+    const handleSearch = (term, isLanguageChange = false) => {
         setSearchTerm(term);
         if (ws) {
             ws.close();
@@ -37,6 +37,10 @@ export default function LandingPage() {
                 const data = JSON.parse(event.data);
                 console.log('WebSocket message received:', data); // Debugging statement
                 setSearchResults(data.results);
+                // If this was a language change and there are results, auto-select the first result
+                if (isLanguageChange && data.results && data.results.length > 0) {
+                    setSelectedResult(data.results[0]);
+                }
             } catch (error) {
                 console.error('Error parsing WebSocket message:', error);
             }
@@ -60,10 +64,14 @@ export default function LandingPage() {
 
     const handleLanguageChange = (selectedLanguage) => {
         setLanguage(selectedLanguage);
+        // If there is a current search term, re-run the search with the new language
+        if (searchTerm && searchTerm.trim() !== "") {
+            handleSearch(searchTerm, true); // Pass a flag to indicate language change
+        }
     };
 
     const clearSearch = () => {
-        setSearchTerm('');
+        // setSearchTerm(''); // Do not clear the search box
         setSearchResults([]);
         setSelectedResult(null);
     };
@@ -75,10 +83,10 @@ export default function LandingPage() {
                 <h2>Looking for a job? Enter keywords below</h2>
             </div>
             <div className="language-list-container">
-                <LanguageList onLanguageChange={handleLanguageChange} />
+                <LanguageList onLanguageChange={handleLanguageChange} language={language} />
             </div>
             <div className="search-bar-container">
-                <SearchBar onSearch={handleSearch} clearSearch={clearSearch} searchTerm={searchTerm} />
+                <SearchBar onSearch={handleSearch} clearSearch={clearSearch} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             </div>
             <div className="content-container">
                 {searchResults && searchResults.length > 0 && (
@@ -93,12 +101,12 @@ export default function LandingPage() {
                 )}
                 {selectedResult && (
                     <div className="translation-containers">
-                        <div className="english-version">
+                        <div className="english-version large-panel">
                             <h3>English Version:</h3>
                             <p>{selectedResult.title}</p>
                             <p>{selectedResult.description}</p>
                         </div>
-                        <div className="other-language-version">
+                        <div className="other-language-version large-panel">
                             <h3>Other Language Version:</h3>
                             <p>{selectedResult.title_translation}</p>
                             <p>{selectedResult.description_translation}</p>

@@ -7,13 +7,11 @@ import SearchBar from "./SearchBar"
 import DropdownList from "./LanguageList"
 
 function App() {
-
+  const [searchTerm, setSearchTerm] = useState("");
 
   return (
     <>
-    
-      <LandingPage />
-     
+      <LandingPage searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
     </>
   )
 }
