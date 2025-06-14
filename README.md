@@ -41,6 +41,7 @@ Kentucky's immigrant and refugee communities face significant challenges in navi
 - Create an account on https://developer.adzuna.com/, then when logged in: in dashboard, find API Access Details and copy the Application ID and Application Keys to "example.env". Rename "example.env" to ".env"
 - Start the Backend Server with -> cd ../Backend -> python backend
 - Start the Frontend Server with -> cd ../Front_end -> npm run dev
+- Visit https://aistudio.google.com/apikey and create an API Key to use for translation. Put this key into the ".env" file
 - Visit the local address (usually 'http://localhost:5173/') provided in the terminal by Vite to access the web app.
 - Use the search bar to find jobs, select your language
 - Admins can access the admin interface for management tasks.
